@@ -7,7 +7,6 @@ set -o nounset
 prepare_cluster_for_gpu_operator() {
     trap collect_must_gather ERR
 
-    toolbox/cluster/capture_environment.sh
     entitle.sh
 
     if ! toolbox/nfd/has_nfd_labels.sh; then

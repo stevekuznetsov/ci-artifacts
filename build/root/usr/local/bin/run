@@ -63,8 +63,8 @@ prechecks() {
 
 ##############
 
-ci_banner "$@"
-prechecks
+# ci_banner "$@"
+# prechecks
 
 #############
 

@@ -5,11 +5,11 @@ set -o errexit
 set -o nounset
 set -x
 
-if ! [ -f toolbox/entitlement/test_cluster.sh ]; then
-  echo "FATAL: entitlement scripts not found in $PWD/toolbox/entitlement/"
-  echo "INFO: $0 is intended only for running in the 'OpenShift PSAP CI artifacts' image. (INSIDE_CI_IMAGE=$INSIDE_CI_IMAGE)"
-  exit 1
-fi
+# if ! [ -f toolbox/entitlement/test_cluster.sh ]; then
+#   echo "FATAL: entitlement scripts not found in $PWD/toolbox/entitlement/"
+#   echo "INFO: $0 is intended only for running in the 'OpenShift PSAP CI artifacts' image. (INSIDE_CI_IMAGE=$INSIDE_CI_IMAGE)"
+#   exit 1
+# fi
 
 extract_entitlement_key() {
     resource=$1
@@ -23,11 +23,11 @@ extract_entitlement_key() {
         > "$key"
 }
 
-echo "INFO: Testing if the cluster is already entitled ..."
-if toolbox/entitlement/test_cluster.sh --no-inspect; then
-    echo "INFO: Cluster already entitled, skipping entitlement."
-    exit 0
-fi
+# echo "INFO: Testing if the cluster is already entitled ..."
+# if toolbox/entitlement/test_cluster.sh --no-inspect; then
+#     echo "INFO: Cluster already entitled, skipping entitlement."
+#     exit 0
+# fi
 
 ENTITLEMENT_SECRET_PATH=/var/run/psap-entitlement-secret
 ENTITLEMENT_VERSION=${ENTITLEMENT_SECRET_PATH}/version
@@ -42,6 +42,8 @@ if [[ -e "$ENTITLEMENT_VERSION" ]]; then
     echo "INFO: Version of the secret vault:"
     cat "$ENTITLEMENT_VERSION"
 fi
+
+exit 1
 
 
 if [[ -e "$ENTITLEMENT_RESOURCES" && ! -e "$ENTITLEMENT_PEM" ]]; then
